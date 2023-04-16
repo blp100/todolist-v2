@@ -11,13 +11,20 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+require('dotenv').config();
+
 // Connect to MongoDB
 
-const mongoUser = "admin-brian";
-const mongoPW = "HaUuBn1W2Einqn1R";
-const mongoDB = "todolistDB";
+const mongoUser = process.env.MONGODB_USER;
+const mongoPW = process.env.MONGODB_PW;
+const mongoDB = process.env.MONGODB_NAME;
+
+//change strict query setting to close warning
+mongoose.set('strictQuery', false);
+
 mongoose.connect("mongodb+srv://" + mongoUser + ":" + mongoPW + "@cluster0.lwx4ahm.mongodb.net/" + mongoDB);
 // mongoose.connect("mongodb://localhost:27017/todolistDB");
+
 
 
 // Create New Scheme and Data

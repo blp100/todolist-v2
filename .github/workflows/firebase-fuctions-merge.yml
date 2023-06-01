@@ -9,6 +9,11 @@ name: Deploy to Firebase functions on merge
     branches:
       - main
 
+env:
+  MONGODB_USER: ${{ secrets.MONGODB_USER }}
+  MONGODB_PW: ${{ secrets.MONGODB_PW }}
+  MONGODB_NAME: ${{ secrets.MONGODB_NAME }}
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -34,6 +39,3 @@ jobs:
           args: deploy --only functions
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          MONGODB_USER: ${{ secrets.MONGODB_USER }}
-          MONGODB_PW: ${{ secrets.MONGODB_PW }}
-          MONGODB_NAME: ${{ secrets.MONGODB_NAME }}

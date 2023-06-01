@@ -26,6 +26,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
+      # Create environment file
+      - name: 'Create env file'
+        run: |
+          touch .env
+          echo MONGODB_USER=${{ secrets.MONGODB_USER }} >> .env
+          echo MONGODB_PW=${{ secrets.MONGODB_PW }} >> .env
+          echo MONGODB_NAME=${{ secrets.MONGODB_NAME }} >> .env
+          cat .env
       # Runs a single command using the runners shell
       # And of course we need to goto our functions folder to deploy
       - name: Install npm packages

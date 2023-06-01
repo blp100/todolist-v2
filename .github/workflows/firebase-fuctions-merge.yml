@@ -25,7 +25,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
+      # Runs a single command using the runners shell
+      # And of course we need to goto our functions folder to deploy
+      - name: Install npm packages
+        run: |
+          cd functions
+          npm install
       # Create environment file
       - name: 'Create env file'
         run: |
@@ -34,12 +39,6 @@ jobs:
           echo MONGODB_PW=${{ secrets.MONGODB_PW }} >> .env
           echo MONGODB_NAME=${{ secrets.MONGODB_NAME }} >> .env
           cat .env
-      # Runs a single command using the runners shell
-      # And of course we need to goto our functions folder to deploy
-      - name: Install npm packages
-        run: |
-          cd functions
-          npm install
       # Deploying the functions to firebase
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
